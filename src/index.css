@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --color-kujia-orange: #FF5500;
+  --color-kujia-black: #111110;
+  --color-kujia-paper: #F7F7F5;
+  --color-kujia-border: #E5E5E2;
+}
+
+body {
+  font-family: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  background-color: #F7F7F5;
+  color: #111110;
+  margin: 0;
+  padding: 0;
+}
+
