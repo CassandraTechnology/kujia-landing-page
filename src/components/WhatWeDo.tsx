@@ -39,7 +39,7 @@ export const WhatWeDo: React.FC = () => {
     },
     {
       id: 'banking',
-      label: 'Banking',
+      label: 'Bank Account',
       columns: [
         {
           title: 'Get Bank Accounts',
