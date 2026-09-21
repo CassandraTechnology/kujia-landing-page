@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion, type Variants } from 'motion/react';
 import { Landmark, Mail, Cpu, Zap } from 'lucide-react';
 
 export const Partners: React.FC = () => {
@@ -34,31 +35,65 @@ export const Partners: React.FC = () => {
     },
   ];
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut',
+      },
+    },
+  };
+
   return (
-    <section className="w-full bg-[#F7F7F5] border-b border-[#E5E5E2] py-12 md:py-16">
+    <section className="w-full bg-[#F7F7F5] border-b border-[#E5E5E2] py-14 md:py-18">
       <div className="max-w-6xl mx-auto px-6">
         {/* Titled with the exact sentence “Our Partners” */}
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-8 pb-4 border-b border-[#E5E5E2]">
+        <motion.div 
+          className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-8 pb-4 border-b border-[#E5E5E2]"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#111110]">
             Our Partners
           </h2>
           <span className="font-mono text-xs uppercase tracking-widest text-[#73736E] mt-1 sm:mt-0">
             Ecosystem Network
           </span>
-        </div>
+        </motion.div>
 
-        {/* Strip of logos */}
-        <div 
+        {/* Strip of logos with staggered scroll reveal */}
+        <motion.div 
           id="partners-strip" 
           className="grid grid-cols-2 md:grid-cols-4 gap-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
         >
           {partners.map((partner) => {
             const Icon = partner.icon;
             return (
-              <div
+              <motion.div
                 key={partner.id}
                 id={partner.id}
-                className="bg-white border border-[#E5E5E2] p-5 flex flex-col items-start justify-between min-h-[110px] hover:border-[#111110] transition-colors"
+                variants={itemVariants}
+                whileHover={{ y: -3, transition: { duration: 0.15 } }}
+                className="bg-white border border-[#E5E5E2] p-5 flex flex-col items-start justify-between min-h-[110px] hover:border-[#111110] transition-colors shadow-[0_2px_8px_rgba(0,0,0,0.02)] cursor-default"
               >
                 <div className="flex items-center justify-between w-full mb-3">
                   <div className="w-8 h-8 bg-[#F0F0EE] flex items-center justify-center text-[#111110]">
@@ -77,11 +112,12 @@ export const Partners: React.FC = () => {
                     {partner.service}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 };
+

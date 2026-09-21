@@ -1,11 +1,18 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Mail, MapPin, Phone } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-[#111110] text-[#E5E5E2] py-16">
+    <footer className="w-full bg-[#111110] text-[#E5E5E2] py-16 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-[#262624]">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-[#262624]"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
           {/* Brand identifier */}
           <div className="md:col-span-5 flex flex-col justify-between">
             <div>
@@ -88,7 +95,7 @@ export const Footer: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Minimalist bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#63635E] font-mono gap-4">
@@ -104,3 +111,4 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+
